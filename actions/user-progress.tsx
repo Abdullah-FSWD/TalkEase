@@ -35,7 +35,9 @@ export async function upsertUserProgress(courseId: number) {
     });
     revalidatePath("/courses");
     revalidatePath("/learn");
-    redirect("/learn");
+    // redirect("/learn");
+
+    return true;
   }
 
   await db.insert(userProgress).values({
@@ -47,4 +49,6 @@ export async function upsertUserProgress(courseId: number) {
   revalidatePath("/courses");
   revalidatePath("/learn");
   redirect("/learn");
+
+  return true;
 }

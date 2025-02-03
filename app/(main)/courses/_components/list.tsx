@@ -14,21 +14,26 @@ type ListProps = {
   activeCourseId?: typeof userProgress.$inferSelect.activeCourseId;
 };
 
-export function List({ courses, activeCourseId }: ListProps) {
+export const List = ({ courses, activeCourseId }: ListProps) => {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
 
-  function onClick(id: number) {
-    console.log("id", id);
-    if (pending) return null;
+  const onClick = (id: number) => {
+    if (pending) return;
 
     if (id === activeCourseId) {
-      router.push("/learn");
+      return router.push("/learn");
     }
-    startTransition(() => {
-      upsertUserProgress(id).catch(() => toast.error("Something went wrong!!"));
+
+    startTransition(async () => {
+      const result = await upsertUserProgress(id).catch(() =>
+        toast.error("Something went wrong.")
+      );
+      if (result) {
+        router.push("/learn");
+      }
     });
-  }
+  };
   return (
     <div className="pt-6 grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-4">
       {courses.map((course) => (
@@ -44,4 +49,4 @@ export function List({ courses, activeCourseId }: ListProps) {
       ))}
     </div>
   );
-}
+};
