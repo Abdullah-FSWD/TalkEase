@@ -16,14 +16,14 @@ import { Unit } from "./_components/unit";
 async function LearnPage() {
   const userProgressData = getUserProgress();
   const courseProgressData = getCourseProgress();
-  const leassonPercentageData = getLessonPercentage();
+  const lessonPercentageData = getLessonPercentage();
   const unitsData = getUnits();
 
-  const [userProgress, courseProgress, leassonPercentage, units] =
+  const [userProgress, courseProgress, lessonPercentage, units] =
     await Promise.all([
       userProgressData,
       courseProgressData,
-      leassonPercentageData,
+      lessonPercentageData,
       unitsData,
     ]);
 
@@ -55,7 +55,7 @@ async function LearnPage() {
               lessons={unit.lessons}
               // TODO: check if it is working fine, if not then change it with the source code
               activeLesson={courseProgress?.activeLesson}
-              activeLessonPercentage={leassonPercentage}
+              activeLessonPercentage={lessonPercentage}
             />
           </div>
         ))}
