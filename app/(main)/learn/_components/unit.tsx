@@ -40,10 +40,10 @@ export function Unit({
               key={lesson.id}
               id={lesson.id}
               index={index}
-              locked={isLocked}
-              current={true || isCurrent}
-              percentage={activeLessonPercentage}
               totalCount={lessons.length - 1}
+              current={isCurrent}
+              locked={isLocked}
+              percentage={activeLessonPercentage}
             />
           );
         })}

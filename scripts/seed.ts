@@ -60,12 +60,72 @@ async function main() {
         order: 1,
         title: "Nouns",
       },
-      // {
-      //   id: 2,
-      //   unitId: 1, // Unit 1 (Learn the basics...)
-      //   order: 2,
-      //   title: "Verbs",
-      // },
+      {
+        id: 2,
+        unitId: 1, // Unit 1 (Learn the basics...)
+        order: 2,
+        title: "Verbs",
+      },
+      {
+        id: 3,
+        unitId: 1, // Unit 1 (Learn the basics...)
+        order: 3,
+        title: "Verbs",
+      },
+      {
+        id: 4,
+        unitId: 1, // Unit 1 (Learn the basics...)
+        order: 4,
+        title: "Verbs",
+      },
+      {
+        id: 5,
+        unitId: 1, // Unit 1 (Learn the basics...)
+        order: 5,
+        title: "Verbs",
+      },
+      {
+        id: 6,
+        unitId: 1, // Unit 1 (Learn the basics...)
+        order: 6,
+        title: "Verbs",
+      },
+      {
+        id: 7,
+        unitId: 1, // Unit 1 (Learn the basics...)
+        order: 7,
+        title: "Verbs",
+      },
+      {
+        id: 8,
+        unitId: 1, // Unit 1 (Learn the basics...)
+        order: 8,
+        title: "Verbs",
+      },
+      {
+        id: 9,
+        unitId: 1, // Unit 1 (Learn the basics...)
+        order: 9,
+        title: "Verbs",
+      },
+      {
+        id: 10,
+        unitId: 1, // Unit 1 (Learn the basics...)
+        order: 10,
+        title: "Verbs",
+      },
+      {
+        id: 11,
+        unitId: 1, // Unit 1 (Learn the basics...)
+        order: 11,
+        title: "Verbs",
+      },
+      {
+        id: 12,
+        unitId: 1, // Unit 1 (Learn the basics...)
+        order: 12,
+        title: "Verbs",
+      },
     ]);
 
     await db.insert(schema.challenges).values([
