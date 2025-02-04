@@ -1,9 +1,11 @@
+import { redirect } from "next/navigation";
+
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
-import { Header } from "./_components/header";
 import { UserProgress } from "@/components/user-progress";
 import { getUnits, getUserProgress } from "@/db/queries";
-import { redirect } from "next/navigation";
+
+import { Header } from "./_components/header";
 import { Unit } from "./_components/unit";
 
 async function LearnPage() {
