@@ -27,7 +27,7 @@ export const List = ({ courses, activeCourseId }: ListProps) => {
 
     startTransition(async () => {
       const result = await upsertUserProgress(id).catch(() =>
-        toast.error("Something went wrong.")
+        toast.error("Something went wrong."),
       );
       if (result) {
         router.push("/learn");

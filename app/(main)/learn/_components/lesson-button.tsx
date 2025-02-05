@@ -91,7 +91,7 @@ export function LessonButton({
                     locked
                       ? "fill-neutral-400 text-neutral-400 stroke-neutral-400"
                       : "fill-primary-foreground text-primary-foreground",
-                    isCompleted && "fill-none stroke-[4]"
+                    isCompleted && "fill-none stroke-[4]",
                   )}
                   style={{
                     width: "2.5rem",
@@ -113,7 +113,7 @@ export function LessonButton({
                 locked
                   ? "fill-neutral-400 text-neutral-400 stroke-neutral-400"
                   : "fill-primary-foreground text-primary-foreground",
-                isCompleted && "fill-none stroke-[4]"
+                isCompleted && "fill-none stroke-[4]",
               )}
               style={{
                 width: "2.5rem",

@@ -93,7 +93,7 @@ export const challengeOptionsRelations = relations(
       fields: [challengeOptions.challengeId],
       references: [challenges.id],
     }),
-  })
+  }),
 );
 
 export const challengeProgress = pgTable("challenge_progress", {
@@ -112,7 +112,7 @@ export const challengeProgressRelations = relations(
       fields: [challengeProgress.challengeId],
       references: [challenges.id],
     }),
-  })
+  }),
 );
 
 export const userProgress = pgTable("user_progress", {
