@@ -68,7 +68,7 @@ export function Card({
         )}
       >
         {/* TODO: check the layout if necessary remove the comment  */}
-        {/* {type === "SELECT" && <div />} */}
+        {type === "SELECT" && <div />}
         <p
           className={cn(
             "text-neutral-600 text-sm lg:text-base",
