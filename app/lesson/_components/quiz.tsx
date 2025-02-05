@@ -41,10 +41,43 @@ export function Quiz({
   const challenge = challenges[activeIndex];
   const options = challenge?.challengeOptions ?? [];
 
+  function onNext() {
+    setActiveIndex((current) => current + 1);
+  }
+
   function onSelect(id: number) {
     if (status !== "none") return;
 
     setSelectedOption(id);
+  }
+
+  function onContinue() {
+    if (!selectedOption) return;
+
+    if (status === "wrong") {
+      setStatus("none");
+      setSelectedOption(undefined);
+      return;
+    }
+
+    if (status === "correct") {
+      onNext();
+      setStatus("none");
+      setSelectedOption(undefined);
+      return;
+    }
+
+    const correctOption = options.find((option) => option.correct);
+
+    if (!correctOption) {
+      return;
+    }
+
+    if (correctOption.id === selectedOption) {
+      console.log("Correct option");
+    } else {
+      console.error("Wrong answer!");
+    }
   }
 
   const title =
@@ -82,7 +115,7 @@ export function Quiz({
           </div>
         </div>
       </div>
-      <Footer disabled={!selectedOption} status={status} onCheck={() => {}} />
+      <Footer disabled={!selectedOption} status={status} onCheck={onContinue} />
     </>
   );
 }
