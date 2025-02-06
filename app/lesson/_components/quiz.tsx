@@ -10,6 +10,7 @@ import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
 import { Footer } from "./footer";
 import { toast } from "sonner";
+import { reduceHearts } from "@/actions/user-progress";
 
 type QuizProps = {
   initialLessonId: number;
@@ -97,8 +98,22 @@ export function Quiz({
           .catch(() => toast.error("Something went wrong. Please try again."));
       });
     } else {
-      console.error("Wrong answer!");
     }
+    startTransition(() => {
+      reduceHearts(challenge.id)
+        .then((response) => {
+          if (response?.error === "hearts") {
+            console.error("Missing hearts");
+            return;
+          }
+          setStatus("wrong");
+
+          if (!response?.error) {
+            setHearts((prev) => Math.max(prev - 1, 0));
+          }
+        })
+        .catch(() => toast.error("Something went wrong. Please try again"));
+    });
   }
 
   const title =
