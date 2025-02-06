@@ -67,8 +67,7 @@ export function Card({
           type === "ASSIST" && "flex-row-reverse"
         )}
       >
-        {/* TODO: check the layout if necessary remove the comment  */}
-        {type === "SELECT" && <div />}
+        {type === "ASSIST" && <div />}
         <p
           className={cn(
             "text-neutral-600 text-sm lg:text-base",
