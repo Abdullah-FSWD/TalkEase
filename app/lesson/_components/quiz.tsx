@@ -15,8 +15,9 @@ import { Header } from "./header";
 import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
 import { Footer } from "./footer";
-import { useAudio, useWindowSize } from "react-use";
+import { useAudio, useMount, useWindowSize } from "react-use";
 import { ResultCard } from "./result-card";
+import { usePracticeModal } from "@/hooks/use-practice-modal";
 
 type QuizProps = {
   initialLessonId: number;
@@ -37,6 +38,13 @@ export function Quiz({
   userSubscription,
 }: QuizProps) {
   const { open: openHeartsModal } = useHeartsModal();
+  const { open: openPracticeModal } = usePracticeModal();
+
+  useMount(() => {
+    if (initialPercentage === 100) {
+      openPracticeModal();
+    }
+  });
 
   const { width, height } = useWindowSize();
 
@@ -51,11 +59,13 @@ export function Quiz({
 
   const [lessonId] = useState(initialLessonId);
   const [hearts, setHearts] = useState(initialHearts);
-  const [percentage, setPercentage] = useState(initialPercentage);
+  const [percentage, setPercentage] = useState(() =>
+    initialPercentage === 100 ? 0 : initialPercentage
+  );
   const [challenges] = useState(initialLessonChallenges);
   const [activeIndex, setActiveIndex] = useState(() => {
     const uncompletedIndex = challenges.findIndex(
-      (challenge) => !challenge.completed,
+      (challenge) => !challenge.completed
     );
     return uncompletedIndex === -1 ? 0 : uncompletedIndex;
   });
