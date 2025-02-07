@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import Confetti from "react-confetti";
 
 import { challengeOptions, challenges } from "@/db/schema";
+import { useHeartsModal } from "@/hooks/use-hearts-modal";
 import { upserChallengeProgress } from "@/actions/challenge-progress";
 import { reduceHearts } from "@/actions/user-progress";
 
@@ -35,6 +36,8 @@ export function Quiz({
   initialPercentage,
   userSubscription,
 }: QuizProps) {
+  const { open: openHeartsModal } = useHeartsModal();
+
   const { width, height } = useWindowSize();
 
   const router = useRouter();
@@ -100,7 +103,7 @@ export function Quiz({
         upserChallengeProgress(challenge.id)
           .then((response) => {
             if (response?.error === "hearts") {
-              console.error("Missing hearts");
+              openHeartsModal();
               return;
             }
             correctControls.play();
@@ -119,7 +122,7 @@ export function Quiz({
         reduceHearts(challenge.id)
           .then((response) => {
             if (response?.error === "hearts") {
-              console.error("Missing hearts");
+              openHeartsModal();
               return;
             }
             incorrectControls.play();
