@@ -14,14 +14,14 @@ export function ResultCard({ value, variant }: ResultCardProps) {
       className={cn(
         "rounded-2xl border-2 w-full",
         variant === "hearts" && "bg-rose-400 border-rose-400",
-        variant === "points" && "bg-orange-400 border-orange-400"
+        variant === "points" && "bg-orange-400 border-orange-400",
       )}
     >
       <div
         className={cn(
           "p-1.5 text-white rounded-t-xl font-bold text-center uppercase text-xs",
           variant === "hearts" && "bg-rose-500",
-          variant === "points" && "bg-orange-400"
+          variant === "points" && "bg-orange-400",
         )}
       >
         {variant === "hearts" ? "Hearts" : "Points"}
@@ -30,7 +30,7 @@ export function ResultCard({ value, variant }: ResultCardProps) {
         className={cn(
           "rounded-2xl bg-white flex items-center justify-center p-6 font-bold text-lg",
           variant === "hearts" && "text-rose-500",
-          variant === "points" && "text-rose-400"
+          variant === "points" && "text-rose-400",
         )}
       >
         <Image

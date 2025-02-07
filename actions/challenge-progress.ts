@@ -19,7 +19,7 @@ export async function upserChallengeProgress(challengeId: number) {
   const currentUserProgress = await getUserProgress();
 
   if (!currentUserProgress) {
-    throw new Error("user progress not found!");
+    throw new Error("User progress not found");
   }
 
   const challenge = await db.query.challenges.findFirst({
@@ -27,19 +27,20 @@ export async function upserChallengeProgress(challengeId: number) {
   });
 
   if (!challenge) {
-    throw new Error("challenge not found!");
+    throw new Error("Challenge not found");
   }
 
   const lessonId = challenge.lessonId;
 
-  const existiongChallegeProgress = await db.query.challengeProgress.findFirst({
+  const existingChallengeProgress = await db.query.challengeProgress.findFirst({
     where: and(
       eq(challengeProgress.userId, userId),
-      eq(challengeProgress.challengeId, lessonId)
+      eq(challengeProgress.challengeId, challengeId)
     ),
   });
 
-  const isPractice = !!existiongChallegeProgress;
+  const isPractice = !!existingChallengeProgress;
+
   if (currentUserProgress.hearts === 0 && !isPractice) {
     return { error: "hearts" };
   }
@@ -50,7 +51,7 @@ export async function upserChallengeProgress(challengeId: number) {
       .set({
         completed: true,
       })
-      .where(eq(challengeProgress.id, existiongChallegeProgress.id));
+      .where(eq(challengeProgress.id, existingChallengeProgress.id));
 
     await db
       .update(userProgress)
