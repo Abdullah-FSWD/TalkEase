@@ -67,7 +67,7 @@ export async function reduceHearts(challengeId: number) {
   const existingChallengeProgress = await db.query.challengeProgress.findFirst({
     where: and(
       eq(userProgress.userId, userId),
-      eq(challengeProgress.challengeId, challengeId)
+      eq(challengeProgress.challengeId, challengeId),
     ),
   });
 
