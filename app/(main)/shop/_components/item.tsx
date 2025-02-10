@@ -25,6 +25,10 @@ export function Item({ hearts, points, hasActiveSubscription }: ItemProps) {
       refillHearts().then(() => toast.error("Something went wrong"));
     });
   }
+  function onUpgrade() {
+    startTransition(() => {});
+  }
+
   return (
     <ul className="w-full">
       <div className="flex items-center p-4 gap-x-4 border-t-2 w-full">
@@ -56,7 +60,7 @@ export function Item({ hearts, points, hasActiveSubscription }: ItemProps) {
             Unlimited hearts
           </p>
         </div>
-        <Button onClick={() => {}} disabled={pending}>
+        <Button onClick={onUpgrade} disabled={pending}>
           {hasActiveSubscription ? "settings" : "upgrade"}
         </Button>
       </div>
