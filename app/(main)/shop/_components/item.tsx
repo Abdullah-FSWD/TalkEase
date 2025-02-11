@@ -6,6 +6,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { refillHearts } from "@/actions/user-progress";
+import { createStripeUrl } from "@/actions/user-subscription";
 
 type ItemProps = {
   hearts: number;
@@ -26,7 +27,15 @@ export function Item({ hearts, points, hasActiveSubscription }: ItemProps) {
     });
   }
   function onUpgrade() {
-    startTransition(() => {});
+    startTransition(() => {
+      createStripeUrl()
+        .then((response) => {
+          if (response.data) {
+            window.location.href = response.data;
+          }
+        })
+        .catch(() => toast.error("Something went wrong"));
+    });
   }
 
   return (
