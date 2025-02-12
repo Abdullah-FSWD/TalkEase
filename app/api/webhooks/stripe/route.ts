@@ -67,3 +67,4 @@ export async function POST(req: Request) {
 
 // TODO: generate webhook and add STRIPE_WEBHOOK_SECRET on env
 //  TODO: add api/webhook/stripe in middleware's public route
+//  TODO: aactivate customer setting form stripe customer
