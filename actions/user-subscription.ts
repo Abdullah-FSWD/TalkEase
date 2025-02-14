@@ -35,7 +35,7 @@ export const createStripeUrl = async () => {
       {
         quantity: 1,
         price_data: {
-          currency: "INR",
+          currency: "USD",
           product_data: {
             name: "TalkEase Pro",
             description: "Unlimited Hearts",

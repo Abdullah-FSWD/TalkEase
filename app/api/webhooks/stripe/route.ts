@@ -65,6 +65,4 @@ export async function POST(req: Request) {
   return new NextResponse(null, { status: 200 });
 }
 
-// TODO: generate webhook and add STRIPE_WEBHOOK_SECRET on env
-//  TODO: add api/webhook/stripe in middleware's public route
-//  TODO: aactivate customer setting form stripe customer
+//  TODO: activate customer setting form stripe customer
