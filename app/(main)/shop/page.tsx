@@ -35,18 +35,18 @@ async function ShopPage() {
       <FeedWrapper>
         <div className="flex flex-col items-center w-full">
           <Image src="/shop.svg" alt="Shop" height={90} width={90} />
+          <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
+            Shop
+          </h1>
+          <p className="text-muted-foreground text-center text-lg mb-6">
+            Spend your points on cool stuff.
+          </p>
+          <Item
+            hearts={userProgress.hearts}
+            points={userProgress.points}
+            hasActiveSubscription={isPro}
+          />
         </div>
-        <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
-          Shop
-        </h1>
-        <p className="text-muted-foreground text-center text-lg mb-6">
-          Spend your points on cool stuff.
-        </p>
-        <Item
-          hearts={userProgress.hearts}
-          points={userProgress.points}
-          hasActiveSubscription={isPro}
-        />
       </FeedWrapper>
     </div>
   );
