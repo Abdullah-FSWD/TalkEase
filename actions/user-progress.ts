@@ -13,8 +13,8 @@ import {
 import { challengeProgress, challenges, userProgress } from "@/db/schema";
 import { redirect } from "next/navigation";
 import { and, eq } from "drizzle-orm";
+import { POINTS_TO_REFILL } from "@/lib/constants";
 
-const POINTS_TO_REFILL = 10;
 export async function upsertUserProgress(courseId: number) {
   const { userId } = await auth();
   const user = await currentUser();

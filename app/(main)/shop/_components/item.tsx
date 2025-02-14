@@ -7,14 +7,13 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { refillHearts } from "@/actions/user-progress";
 import { createStripeUrl } from "@/actions/user-subscription";
+import { POINTS_TO_REFILL } from "@/lib/constants";
 
 type ItemProps = {
   hearts: number;
   points: number;
   hasActiveSubscription: boolean;
 };
-
-const POINTS_TO_REFILL = 10;
 
 export function Item({ hearts, points, hasActiveSubscription }: ItemProps) {
   const [pending, startTransition] = useTransition();

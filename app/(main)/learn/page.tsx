@@ -61,7 +61,6 @@ async function LearnPage() {
               description={unit.description}
               title={unit.title}
               lessons={unit.lessons}
-              // TODO: check if it is working fine, if not then change it with the source code
               activeLesson={courseProgress?.activeLesson}
               activeLessonPercentage={lessonPercentage}
             />
