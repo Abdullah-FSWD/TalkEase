@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Confetti from "react-confetti";
 
-import { challengeOptions, challenges } from "@/db/schema";
+import { challengeOptions, challenges, userSubscription } from "@/db/schema";
 import { useHeartsModal } from "@/hooks/use-hearts-modal";
 import { upserChallengeProgress } from "@/actions/challenge-progress";
 import { reduceHearts } from "@/actions/user-progress";
@@ -27,7 +27,11 @@ type QuizProps = {
     completed: boolean;
     challengeOptions: (typeof challengeOptions.$inferSelect)[];
   })[];
-  userSubscription: any;
+  userSubscription:
+    | (typeof userSubscription.$inferSelect & {
+        isActive: boolean;
+      })
+    | null;
 };
 
 export function Quiz({
@@ -51,6 +55,7 @@ export function Quiz({
   const router = useRouter();
 
   const [finishAudio] = useAudio({ src: "/finish.mp3", autoPlay: true });
+
   const [correctAudio, _c, correctControls] = useAudio({ src: "/correct.wav" });
   const [incorrectAudio, _i, incorrectControls] = useAudio({
     src: "/incorrect.wav",
@@ -60,12 +65,12 @@ export function Quiz({
   const [lessonId] = useState(initialLessonId);
   const [hearts, setHearts] = useState(initialHearts);
   const [percentage, setPercentage] = useState(() =>
-    initialPercentage === 100 ? 0 : initialPercentage,
+    initialPercentage === 100 ? 0 : initialPercentage
   );
   const [challenges] = useState(initialLessonChallenges);
   const [activeIndex, setActiveIndex] = useState(() => {
     const uncompletedIndex = challenges.findIndex(
-      (challenge) => !challenge.completed,
+      (challenge) => !challenge.completed
     );
     return uncompletedIndex === -1 ? 0 : uncompletedIndex;
   });
