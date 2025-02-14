@@ -37,7 +37,16 @@ export const getUserProgress = cache(async () => {
 export const getCourseById = cache(async (courseId: number) => {
   const data = await db.query.courses.findFirst({
     where: eq(courses.id, courseId),
-    //TODO: populate units and lessons
+    with: {
+      units: {
+        orderBy: (units, { asc }) => [asc(units.order)],
+        with: {
+          lessons: {
+            orderBy: (lessons, { asc }) => [asc(lessons.order)],
+          },
+        },
+      },
+    },
   });
   return data;
 });
@@ -121,7 +130,7 @@ export const getCourseProgress = cache(async () => {
           !challenge.challengeProgress ||
           challenge.challengeProgress.length === 0 ||
           challenge.challengeProgress.some(
-            (progress) => progress.completed === false,
+            (progress) => progress.completed === false
           )
         );
       });
@@ -193,10 +202,10 @@ export const getLessonPercentage = cache(async () => {
   }
 
   const completedChallenges = lesson.challenges.filter(
-    (challenge) => challenge.completed,
+    (challenge) => challenge.completed
   );
   const percentage = Math.round(
-    (completedChallenges.length / lesson.challenges.length) * 100,
+    (completedChallenges.length / lesson.challenges.length) * 100
   );
 
   return percentage;
@@ -216,7 +225,7 @@ export const getUserSubscription = cache(async () => {
 
   const isActive =
     data.stripePriceId &&
-    data.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now();
+    data.stripeCurrentPeriodEnd.getTime()! + DAY_IN_MS > Date.now();
 
   return {
     ...data,

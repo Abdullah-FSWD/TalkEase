@@ -5,7 +5,11 @@ import { revalidatePath } from "next/cache";
 
 import db from "@/db/drizzle";
 
-import { getCourseById, getUserProgress } from "@/db/queries";
+import {
+  getCourseById,
+  getUserProgress,
+  getUserSubscription,
+} from "@/db/queries";
 import { challengeProgress, challenges, userProgress } from "@/db/schema";
 import { redirect } from "next/navigation";
 import { and, eq } from "drizzle-orm";
@@ -25,7 +29,9 @@ export async function upsertUserProgress(courseId: number) {
     throw new Error("Course not found!");
   }
 
-  // TODO: add units and lessons
+  if (!course.units.length || !course.units[0].lessons.length) {
+    throw new Error("Course is empty");
+  }
 
   const existingUserProgress = await getUserProgress();
 
@@ -63,11 +69,22 @@ export async function reduceHearts(challengeId: number) {
   }
 
   const currentUserProgress = await getUserProgress();
+  const userSubscription = await getUserSubscription();
+
+  const challenge = await db.query.challenges.findFirst({
+    where: eq(challenges.id, challengeId),
+  });
+
+  if (!challenge) {
+    throw new Error("Challenge not found");
+  }
+
+  const lessonId = challenge.id;
 
   const existingChallengeProgress = await db.query.challengeProgress.findFirst({
     where: and(
       eq(userProgress.userId, userId),
-      eq(challengeProgress.challengeId, challengeId),
+      eq(challengeProgress.challengeId, challengeId)
     ),
   });
 
@@ -81,15 +98,9 @@ export async function reduceHearts(challengeId: number) {
     throw new Error("User progress not found!");
   }
 
-  const challenge = await db.query.challenges.findFirst({
-    where: eq(challenges.id, challengeId),
-  });
-
-  if (!challenge) {
-    throw new Error("Challenge not found");
+  if (userSubscription?.isActive) {
+    return { error: "subscription" };
   }
-
-  const lessonId = challenge.id;
 
   if (currentUserProgress.hearts === 0) {
     return { error: "hearts" };
