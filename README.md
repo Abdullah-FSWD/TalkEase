@@ -1,3 +1,13 @@
+### Landing page
+![image](https://github.com/user-attachments/assets/3cd9a854-2b76-49b6-b3c0-1db2bb96c620)
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
