@@ -1,12 +1,32 @@
 ### Landing page
 ![image](https://github.com/user-attachments/assets/3cd9a854-2b76-49b6-b3c0-1db2bb96c620)
 
+### Courses page
+![image](https://github.com/user-attachments/assets/92e09641-70dd-4014-a8e3-ab15b4eec7bc)
 
+### Learn page
+![image](https://github.com/user-attachments/assets/cc1d4e88-7afa-4188-b5f4-feb983e7f014)
 
+### Lessons page
+![image](https://github.com/user-attachments/assets/e19946b1-ce6e-46ae-a09a-4590e67df01a)
 
+### Challenges page
+![image](https://github.com/user-attachments/assets/ba0f4e3a-0b95-49aa-ae3a-580156fa0018)
 
+### Leaderboard
+![image](https://github.com/user-attachments/assets/c706916d-af9b-4301-8833-201040fd04d1)
 
+### Quests page
+![image](https://github.com/user-attachments/assets/aafee52e-afbb-482f-b30d-ed03391215e0)
 
+### Shop page
+![image](https://github.com/user-attachments/assets/6dd11cad-19d3-41da-8908-6f2c3e92248a)
+
+### Payment page
+![image](https://github.com/user-attachments/assets/429a7cca-9d9f-4c73-86ee-c445699ae32f)
+
+### Admin page
+![image](https://github.com/user-attachments/assets/4d22d6bd-fb77-4fd7-b364-f94f7a864dea)
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
