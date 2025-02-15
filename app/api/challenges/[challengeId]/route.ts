@@ -6,8 +6,9 @@ import { challenges } from "@/db/schema";
 import { getIsAdmin } from "@/lib/admin";
 export const GET = async (
   req: Request,
-  { params }: { params: { challengeId: number } }
+  { params }: { params: Promise<{ challengeId: number }> }
 ) => {
+  const { challengeId } = await params;
   const isAdmin = await getIsAdmin();
 
   if (!isAdmin) {
@@ -15,7 +16,7 @@ export const GET = async (
   }
 
   const data = await db.query.challenges.findFirst({
-    where: eq(challenges.id, params.challengeId),
+    where: eq(challenges.id, challengeId),
   });
 
   return NextResponse.json(data);
@@ -23,8 +24,9 @@ export const GET = async (
 
 export const PUT = async (
   req: Request,
-  { params }: { params: { challengeId: number } }
+  { params }: { params: Promise<{ challengeId: number }> }
 ) => {
+  const { challengeId } = await params;
   const isAdmin = await getIsAdmin();
 
   if (!isAdmin) {
@@ -37,7 +39,7 @@ export const PUT = async (
     .set({
       ...body,
     })
-    .where(eq(challenges.id, params.challengeId))
+    .where(eq(challenges.id, challengeId))
     .returning();
 
   return NextResponse.json(data[0]);
@@ -45,8 +47,9 @@ export const PUT = async (
 
 export const DELETE = async (
   req: Request,
-  { params }: { params: { challengeId: number } }
+  { params }: { params: Promise<{ challengeId: number }> }
 ) => {
+  const { challengeId } = await params;
   const isAdmin = await getIsAdmin();
 
   if (!isAdmin) {
@@ -55,7 +58,7 @@ export const DELETE = async (
 
   const data = await db
     .delete(challenges)
-    .where(eq(challenges.id, params.challengeId))
+    .where(eq(challenges.id, challengeId))
     .returning();
 
   return NextResponse.json(data[0]);

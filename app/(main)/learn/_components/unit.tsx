@@ -19,10 +19,8 @@ type UnitProps = {
 };
 
 export function Unit({
-  id,
   title,
   description,
-  order,
   lessons,
   activeLesson,
   activeLessonPercentage,

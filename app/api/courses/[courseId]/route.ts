@@ -7,8 +7,9 @@ import { getIsAdmin } from "@/lib/admin";
 
 export async function GET(
   req: Request,
-  { params }: { params: { courseId: number } }
+  { params }: { params: Promise<{ courseId: number }> }
 ) {
+  const { courseId } = await params;
   const isAdmin = await getIsAdmin();
 
   if (!isAdmin) {
@@ -16,7 +17,7 @@ export async function GET(
   }
 
   const data = await db.query.courses.findFirst({
-    where: eq(courses.id, params.courseId),
+    where: eq(courses.id, courseId),
   });
 
   return NextResponse.json(data);
@@ -24,8 +25,9 @@ export async function GET(
 
 export async function PUT(
   req: Request,
-  { params }: { params: { courseId: number } }
+  { params }: { params: Promise<{ courseId: number }> }
 ) {
+  const { courseId } = await params;
   const isAdmin = await getIsAdmin();
 
   if (!isAdmin) {
@@ -38,7 +40,7 @@ export async function PUT(
     .set({
       ...body,
     })
-    .where(eq(courses.id, params.courseId))
+    .where(eq(courses.id, courseId))
     .returning();
 
   return NextResponse.json(data[0]);
@@ -46,8 +48,9 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { courseId: number } }
+  { params }: { params: Promise<{ courseId: number }> }
 ) {
+  const { courseId } = await params;
   const isAdmin = await getIsAdmin();
 
   if (!isAdmin) {
@@ -56,7 +59,7 @@ export async function DELETE(
 
   const data = await db
     .delete(courses)
-    .where(eq(courses.id, params.courseId))
+    .where(eq(courses.id, courseId))
     .returning();
 
   return NextResponse.json(data[0]);

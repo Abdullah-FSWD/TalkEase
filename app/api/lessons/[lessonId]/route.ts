@@ -7,8 +7,9 @@ import { getIsAdmin } from "@/lib/admin";
 
 export const GET = async (
   req: Request,
-  { params }: { params: { lessonId: number } }
+  { params }: { params: Promise<{ lessonId: number }> }
 ) => {
+  const { lessonId } = await params;
   const isAdmin = await getIsAdmin();
 
   if (!isAdmin) {
@@ -16,7 +17,7 @@ export const GET = async (
   }
 
   const data = await db.query.lessons.findFirst({
-    where: eq(lessons.id, params.lessonId),
+    where: eq(lessons.id, lessonId),
   });
 
   return NextResponse.json(data);
@@ -24,8 +25,9 @@ export const GET = async (
 
 export const PUT = async (
   req: Request,
-  { params }: { params: { lessonId: number } }
+  { params }: { params: Promise<{ lessonId: number }> }
 ) => {
+  const { lessonId } = await params;
   const isAdmin = await getIsAdmin();
 
   if (!isAdmin) {
@@ -38,7 +40,7 @@ export const PUT = async (
     .set({
       ...body,
     })
-    .where(eq(lessons.id, params.lessonId))
+    .where(eq(lessons.id, lessonId))
     .returning();
 
   return NextResponse.json(data[0]);
@@ -46,8 +48,9 @@ export const PUT = async (
 
 export const DELETE = async (
   req: Request,
-  { params }: { params: { lessonId: number } }
+  { params }: { params: Promise<{ lessonId: number }> }
 ) => {
+  const { lessonId } = await params;
   const isAdmin = await getIsAdmin();
 
   if (!isAdmin) {
@@ -56,7 +59,7 @@ export const DELETE = async (
 
   const data = await db
     .delete(lessons)
-    .where(eq(lessons.id, params.lessonId))
+    .where(eq(lessons.id, lessonId))
     .returning();
 
   return NextResponse.json(data[0]);

@@ -4,14 +4,15 @@ import { getLesson, getUserProgress, getUserSubscription } from "@/db/queries";
 import { Quiz } from "../_components/quiz";
 
 type LessonIdPageProps = {
-  params: {
+  params: Promise<{
     lessonId: number;
-  };
+  }>;
 };
 
 async function LessonIdPage({ params }: LessonIdPageProps) {
+  const { lessonId } = await params;
   const userProgressData = getUserProgress();
-  const lessonData = getLesson(params.lessonId);
+  const lessonData = getLesson(lessonId);
   const userSubscriptionData = getUserSubscription();
 
   const [userProgress, lesson, userSubscription] = await Promise.all([
