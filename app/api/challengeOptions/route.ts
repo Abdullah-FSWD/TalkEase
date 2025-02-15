@@ -1,39 +1,34 @@
 import { NextResponse } from "next/server";
 
 import db from "@/db/drizzle";
-import { challenges } from "@/db/schema";
+import { challengeOptions } from "@/db/schema";
 import { getIsAdmin } from "@/lib/admin";
 
 export async function GET() {
   const isAdmin = await getIsAdmin();
-
   if (!isAdmin) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
-  const data = await db.query.challenges.findMany();
+  const data = await db.query.challengeOptions.findMany();
 
   return NextResponse.json(data);
 }
 
 export async function POST(req: Request) {
   const isAdmin = await getIsAdmin();
-
   if (!isAdmin) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
   const body = await req.json();
-  console.log("challenge_body", body);
 
   const data = await db
-    .insert(challenges)
+    .insert(challengeOptions)
     .values({
       ...body,
     })
     .returning();
-
-  console.log("challenge_data", data);
 
   return NextResponse.json(data[0]);
 }

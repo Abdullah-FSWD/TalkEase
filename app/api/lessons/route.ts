@@ -4,7 +4,7 @@ import db from "@/db/drizzle";
 import { getIsAdmin } from "@/lib/admin";
 import { lessons } from "@/db/schema";
 
-export const GET = async () => {
+export async function GET() {
   const isAdmin = await getIsAdmin();
 
   if (!isAdmin) {
@@ -14,9 +14,9 @@ export const GET = async () => {
   const data = await db.query.lessons.findMany();
 
   return NextResponse.json(data);
-};
+}
 
-export const POST = async (req: Request) => {
+export async function POST(req: Request) {
   const isAdmin = await getIsAdmin();
 
   if (!isAdmin) {
@@ -33,4 +33,4 @@ export const POST = async (req: Request) => {
     .returning();
 
   return NextResponse.json(data[0]);
-};
+}

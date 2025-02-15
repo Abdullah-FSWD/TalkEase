@@ -17,9 +17,9 @@ import { ChallengeList } from "./challenge/list";
 import { ChallengeCreate } from "./challenge/create";
 import { ChallengeEdit } from "./challenge/edit";
 
-// import { ChallengeOptionList } from "./challengeOption/list";
-// import { ChallengeOptionEdit } from "./challengeOption/edit";
-// import { ChallengeOptionCreate } from "./challengeOption/create";
+import { ChallengeOptionList } from "./challengeOption/list";
+import { ChallengeOptionEdit } from "./challengeOption/edit";
+import { ChallengeOptionCreate } from "./challengeOption/create";
 
 const dataProvider = SimpleRestProvider("/api");
 
@@ -54,7 +54,7 @@ function App() {
         edit={ChallengeEdit}
         recordRepresentation="title"
       />
-      {/* <Resource
+      <Resource
         name="challengeOptions"
         list={ChallengeOptionList}
         create={ChallengeOptionCreate}
@@ -63,7 +63,7 @@ function App() {
         options={{
           label: "Challenge Options",
         }}
-      /> */}
+      />
     </Admin>
   );
 }

@@ -5,10 +5,10 @@ import db from "@/db/drizzle";
 import { units } from "@/db/schema";
 import { getIsAdmin } from "@/lib/admin";
 
-export const GET = async (
+export async function GET(
   req: Request,
-  { params }: { params: Promise<{ unitId: number }> },
-) => {
+  { params }: { params: Promise<{ unitId: number }> }
+) {
   const { unitId } = await params;
   const isAdmin = await getIsAdmin();
 
@@ -21,12 +21,12 @@ export const GET = async (
   });
 
   return NextResponse.json(data);
-};
+}
 
-export const PUT = async (
+export async function PUT(
   req: Request,
-  { params }: { params: Promise<{ unitId: number }> },
-) => {
+  { params }: { params: Promise<{ unitId: number }> }
+) {
   const { unitId } = await params;
   const isAdmin = await getIsAdmin();
 
@@ -44,12 +44,12 @@ export const PUT = async (
     .returning();
 
   return NextResponse.json(data[0]);
-};
+}
 
-export const DELETE = async (
+export async function DELETE(
   req: Request,
-  { params }: { params: Promise<{ unitId: number }> },
-) => {
+  { params }: { params: Promise<{ unitId: number }> }
+) {
   const { unitId } = await params;
   const isAdmin = await getIsAdmin();
 
@@ -60,4 +60,4 @@ export const DELETE = async (
   const data = await db.delete(units).where(eq(units.id, unitId)).returning();
 
   return NextResponse.json(data[0]);
-};
+}

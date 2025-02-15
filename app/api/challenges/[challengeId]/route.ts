@@ -4,10 +4,11 @@ import { NextResponse } from "next/server";
 import db from "@/db/drizzle";
 import { challenges } from "@/db/schema";
 import { getIsAdmin } from "@/lib/admin";
-export const GET = async (
+
+export async function GET(
   req: Request,
-  { params }: { params: Promise<{ challengeId: number }> },
-) => {
+  { params }: { params: Promise<{ challengeId: number }> }
+) {
   const { challengeId } = await params;
   const isAdmin = await getIsAdmin();
 
@@ -20,12 +21,12 @@ export const GET = async (
   });
 
   return NextResponse.json(data);
-};
+}
 
-export const PUT = async (
+export async function PUT(
   req: Request,
-  { params }: { params: Promise<{ challengeId: number }> },
-) => {
+  { params }: { params: Promise<{ challengeId: number }> }
+) {
   const { challengeId } = await params;
   const isAdmin = await getIsAdmin();
 
@@ -43,12 +44,12 @@ export const PUT = async (
     .returning();
 
   return NextResponse.json(data[0]);
-};
+}
 
-export const DELETE = async (
+export async function DELETE(
   req: Request,
-  { params }: { params: Promise<{ challengeId: number }> },
-) => {
+  { params }: { params: Promise<{ challengeId: number }> }
+) {
   const { challengeId } = await params;
   const isAdmin = await getIsAdmin();
 
@@ -62,4 +63,4 @@ export const DELETE = async (
     .returning();
 
   return NextResponse.json(data[0]);
-};
+}
