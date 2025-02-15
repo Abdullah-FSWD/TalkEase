@@ -7,7 +7,7 @@ import { getIsAdmin } from "@/lib/admin";
 
 export async function GET(
   req: Request,
-  { params }: { params: Promise<{ courseId: number }> }
+  { params }: { params: Promise<{ courseId: number }> },
 ) {
   const { courseId } = await params;
   const isAdmin = await getIsAdmin();
@@ -25,7 +25,7 @@ export async function GET(
 
 export async function PUT(
   req: Request,
-  { params }: { params: Promise<{ courseId: number }> }
+  { params }: { params: Promise<{ courseId: number }> },
 ) {
   const { courseId } = await params;
   const isAdmin = await getIsAdmin();
@@ -48,7 +48,7 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: Promise<{ courseId: number }> }
+  { params }: { params: Promise<{ courseId: number }> },
 ) {
   const { courseId } = await params;
   const isAdmin = await getIsAdmin();
