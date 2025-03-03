@@ -7,7 +7,7 @@ import { getIsAdmin } from "@/lib/admin";
 
 export async function GET(
   req: Request,
-  { params }: { params: Promise<{ challengeOptionId: number }> }
+  { params }: { params: Promise<{ challengeOptionId: number }> },
 ) {
   const { challengeOptionId } = await params;
   const isAdmin = await getIsAdmin();
@@ -24,7 +24,7 @@ export async function GET(
 
 export async function PUT(
   req: Request,
-  { params }: { params: Promise<{ challengeOptionId: number }> }
+  { params }: { params: Promise<{ challengeOptionId: number }> },
 ) {
   const { challengeOptionId } = await params;
   const isAdmin = await getIsAdmin();
@@ -46,7 +46,7 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: Promise<{ challengeOptionId: number }> }
+  { params }: { params: Promise<{ challengeOptionId: number }> },
 ) {
   const { challengeOptionId } = await params;
   const isAdmin = await getIsAdmin();
